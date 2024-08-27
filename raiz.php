@@ -1,37 +1,36 @@
 <?php
 
     class Conta{
-        public $nome;
-        public $saldo = 0; 
+        public string $nome;
+        public float $saldo = 0; 
         
-
-        function sacar($valorTirado, $saldo){
-            $atual = $saldo - $valorTirado;
-            if($atual <= 0 ){
-                echo ("O valor desejado tirar e maior que o Saldo atual");
-            }
+        function __construct($nome,$saldo){
+            $this->nome = $nome;
+            $this->saldo = $saldo;
         }
-
-        function depositar($valor){
-
-        }
-
-        
 
         function verSaldo() {
             echo "olá, Titular ".$this->nome."\n";
             echo "Seu saldo Atual : ".$this->saldo."\n \n";
         }
+
+        function sacar($sacar){
+            $valor = $this->saldo;
+
+            $final = $valor - $sacar;
+            $valor = $final;
+
+            return
+            
+        }
     }
 
-    $conta = new Conta();
-    $conta -> nome = "Lucas";
-    $conta -> saldo = "500";
-    $conta -> verSaldo();
+    $conta = new Conta("Lucas",500);
+    $conta->verSaldo();
+
+    $conta->sacar(100);
+
+    $conta->verSaldo();
 
 
-    $conta2 = new Conta();
-    $conta2 -> nome = "Junior";
-    $conta2 -> saldo = "250";
-    $conta2 -> verSaldo();
 ?>
