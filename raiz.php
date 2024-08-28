@@ -14,7 +14,7 @@
             echo "Seu saldo Atual : ".$this->saldo."\n \n";
         }
 
-        function sacar($sacar){
+        function sacar(float $sacar){
             $valor = $this->saldo;
 
             $final = $valor - $sacar;
@@ -22,33 +22,33 @@
             return $this->saldo = $final;
         }
 
-        function pix($pix, $destino){
+        function depositar(float $depositar){
             $saldo = $this->saldo;
-            $destinoReal = $this->nome;
 
-            if ($destino == $destinoReal){
-                echo "Pessoa ", $destinoReal ," é valido!! \n";
-                if ($pix > 0){
-                    echo "pix de", $pix,"enviado \n";
-                    $final = $pix + $saldo;
+            $conta = $saldo + $depositar;
 
-                    return $this->saldo = $final;
+            return $this->saldo = $conta; 
+        }
 
-                } else {
-                    echo "Pix tem que ser maior que 0,00 \n";
-                }
-            }else{
-                echo "Pessoa ", $destino, " não é valido \n";
+        function pix( $pix, Conta $destino){
+
+            if ($pix > 0){
+                $this->sacar($pix);
+                $destino->depositar($pix);
+                return $this->saldo;
             }
         }
     }
 
+
     $conta = new Conta("Lucas",500);
+    $conta2 = new Conta("Joao",10);
+    
     $conta->verSaldo();
-    $conta->pix(1,"Joao");
-    $conta->verSaldo();
+    $conta2->verSaldo();
 
-    $conta = new Conta("Joao",100);
-    $conta->verSaldo();
+    $conta->pix(150,$conta2);
 
+    $conta->verSaldo();
+    $conta2->verSaldo();
 ?>
